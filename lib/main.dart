@@ -1,6 +1,7 @@
-import 'package:ekub/pages/login/Home/home.dart';
 import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
+
+import 'pages/Home/home.dart';
 
 void main() {
   runApp(const MyApp());

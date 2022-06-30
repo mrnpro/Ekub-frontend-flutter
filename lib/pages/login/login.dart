@@ -1,3 +1,5 @@
+import 'package:ekub/common/constants.dart';
+import 'package:ekub/components/logo.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -6,11 +8,10 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kwhite,
       body: SafeArea(
           child: Column(
-        children: const [
-          Text("E-ቁብ"),
-        ],
+        children: const [Logo()],
       )),
     );
   }

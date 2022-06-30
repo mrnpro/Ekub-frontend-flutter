@@ -44,14 +44,14 @@ class topHolder extends StatelessWidget {
             height: 20,
           ),
           Container(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             width: size.width,
             height: size.height / 5,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 offset: const Offset(0, -3),
-                blurRadius: 15,
-                color: Colors.blue,
+                blurRadius: 4,
+                color: Colors.blue.withOpacity(0.15),
               )
             ], color: Colors.blue, borderRadius: BorderRadius.circular(20)),
             child: Column(

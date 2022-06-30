@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Recent extends StatelessWidget {
-  const Recent({
+class Days extends StatelessWidget {
+  const Days({
     Key? key,
   }) : super(key: key);
 

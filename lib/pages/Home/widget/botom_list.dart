@@ -11,28 +11,28 @@ class BottomList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: 10,
+        itemCount: 90,
         itemBuilder: (context, index) => Container(
-          padding: EdgeInsets.all(7),
-          margin: EdgeInsets.symmetric(vertical: 7),
+          padding: const EdgeInsets.all(7),
+          margin: const EdgeInsets.symmetric(vertical: 7),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(20)),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
-              padding: EdgeInsets.all(11),
+              padding: const EdgeInsets.all(11),
               child: Icon(
-                Icons.outbond,
+                Icons.done,
                 color: Colors.white,
               ),
               decoration: BoxDecoration(
                   color: Colors.green, borderRadius: BorderRadius.circular(14)),
             ),
-            Text(
+            const Text(
               "Paid",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text("day 0")
+            Text("day $index")
           ]),
         ),
       ),

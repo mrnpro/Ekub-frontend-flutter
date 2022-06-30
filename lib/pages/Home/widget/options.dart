@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Options extends StatelessWidget {
-  const Options({Key? key, required this.icon, required this.text})
+  const Options(
+      {Key? key,
+      required this.icon,
+      required this.text,
+      required this.onPressed})
       : super(key: key);
   final IconData icon;
   final String text;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,14 +18,14 @@ class Options extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 23,
-            backgroundColor: Color.fromARGB(255, 163, 206, 241),
-            child: IconButton(onPressed: () {}, icon: Icon(icon)),
+            backgroundColor: const Color.fromARGB(255, 163, 206, 241),
+            child: IconButton(onPressed: () => onPressed(), icon: Icon(icon)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 13,
           ),
           Text(
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 11,
               ),

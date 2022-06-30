@@ -1,5 +1,6 @@
 import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/components/logo.dart';
+import 'package:ekub/pages/Home/widget/custom_dialog.dart';
 import 'package:ekub/pages/Home/widget/options.dart';
 import 'package:ekub/pages/login/login.dart';
 import 'package:flutter/material.dart';
@@ -81,10 +82,16 @@ class topHolder extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              Options(icon: Icons.wallet, text: "penality"),
-              Options(icon: Icons.payment, text: "Withdraw"),
-              Options(icon: Icons.charging_station_rounded, text: "Recharge"),
+            children: [
+              Options(icon: Icons.wallet, text: "penality", onPressed: () {}),
+              Options(icon: Icons.payment, text: "Withdraw", onPressed: () {}),
+              Options(
+                  icon: Icons.charging_station_rounded,
+                  text: "Recharge",
+                  onPressed: () {
+                    showDialog(
+                        context: context, builder: (context) => CustomDialog());
+                  }),
             ],
           ),
         ],

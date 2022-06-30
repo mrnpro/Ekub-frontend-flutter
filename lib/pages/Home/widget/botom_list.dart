@@ -32,7 +32,10 @@ class BottomList extends StatelessWidget {
               "Paid",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text("day $index")
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text("day $index"),
+            ),
           ]),
         ),
       ),

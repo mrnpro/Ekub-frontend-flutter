@@ -1,11 +1,13 @@
-import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/common/constants.dart';
 import 'package:ekub/components/logo.dart';
-import 'package:ekub/pages/register/register.dart';
+import 'package:ekub/pages/Home/home.dart';
+import 'package:ekub/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+import '../../Navigator/navigate.dart';
+
+class Register extends StatelessWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,23 @@ class Login extends StatelessWidget {
               Form(
                   child: Column(
                 children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "full name",
+                      fillColor: Colors.white,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kprimary, width: 1.0),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kprimary, width: 1.0),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  kspace,
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: "username",
@@ -62,20 +81,23 @@ class Login extends StatelessWidget {
                     children: [
                       TextButton(
                           onPressed: () {
-                            Navigate.preferReturn(context, const Register());
+                            Navigate.preferReturn(context, const Login());
                           },
-                          child: const Text("Register?")),
+                          child: const Text("Login?")),
                       TextButton(
                           onPressed: () {},
                           child: const Text("Forgot Passwod?"))
                     ],
                   ),
                   kspace,
+                  // ignore: deprecated_member_use
                   FlatButton(
                       color: kprimary,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigate.neverReturn(context, const Home());
+                      },
                       child: const Text(
-                        "Login",
+                        "Register",
                         style: TextStyle(color: kwhite),
                       ))
                 ],

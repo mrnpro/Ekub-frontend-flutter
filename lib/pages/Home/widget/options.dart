@@ -21,6 +21,7 @@ class Options extends StatelessWidget {
           ),
           Text(
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 fontSize: 11,
               ),
               text)

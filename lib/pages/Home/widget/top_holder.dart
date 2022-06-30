@@ -1,4 +1,7 @@
+import 'package:ekub/Navigator/navigate.dart';
+import 'package:ekub/components/logo.dart';
 import 'package:ekub/pages/Home/widget/options.dart';
+import 'package:ekub/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
 class topHolder extends StatelessWidget {
@@ -12,7 +15,6 @@ class topHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height / 2,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -23,7 +25,7 @@ class topHolder extends StatelessWidget {
             color: Colors.blue.withOpacity(0.15),
           )
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
       child: Column(
@@ -31,11 +33,13 @@ class topHolder extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("E-ቁብ ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+              SizedBox(width: size.width / 7, child: const Logo()),
               CircleAvatar(
                 child: IconButton(
-                    onPressed: () {}, icon: Icon(Icons.logout_outlined)),
+                    onPressed: () {
+                      Navigate.neverReturn(context, Login());
+                    },
+                    icon: Icon(Icons.logout_outlined)),
                 backgroundColor: Color.fromARGB(255, 163, 206, 241),
               )
             ],
@@ -76,12 +80,11 @@ class topHolder extends StatelessWidget {
             height: 20,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
               Options(icon: Icons.wallet, text: "penality"),
               Options(icon: Icons.payment, text: "Withdraw"),
               Options(icon: Icons.charging_station_rounded, text: "Recharge"),
-              Options(icon: Icons.dynamic_feed, text: "Days")
             ],
           ),
         ],

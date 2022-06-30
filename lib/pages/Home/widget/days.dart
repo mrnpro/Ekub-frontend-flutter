@@ -10,10 +10,13 @@ class Recent extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text("Recent "),
+        const Text(
+          "Days",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
         TextButton(
             onPressed: () {},
-            child: const Text("View all",
+            child: const Text("3/90",
                 style: TextStyle(
                   color: Colors.red,
                 )))

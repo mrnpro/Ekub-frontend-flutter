@@ -1,4 +1,5 @@
 import 'package:ekub/pages/login/login.dart';
+import 'package:ekub/pages/splash.dart';
 import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Login(),
+      home: const Splash(),
     );
   }
 }

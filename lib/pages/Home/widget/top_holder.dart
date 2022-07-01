@@ -3,7 +3,9 @@ import 'package:ekub/components/logo.dart';
 import 'package:ekub/pages/Home/widget/custom_dialog.dart';
 import 'package:ekub/pages/Home/widget/options.dart';
 import 'package:ekub/pages/login/login.dart';
+import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class topHolder extends StatelessWidget {
   const topHolder({
@@ -36,12 +38,13 @@ class topHolder extends StatelessWidget {
             children: [
               SizedBox(width: size.width / 7, child: const Logo()),
               CircleAvatar(
+                backgroundColor: const Color.fromARGB(255, 163, 206, 241),
                 child: IconButton(
                     onPressed: () {
-                      Navigate.neverReturn(context, Login());
+                      const FlutterSecureStorage().delete(key: "auth");
+                      Navigate.neverReturn(context, Wrapper());
                     },
-                    icon: Icon(Icons.logout_outlined)),
-                backgroundColor: Color.fromARGB(255, 163, 206, 241),
+                    icon: const Icon(Icons.logout_outlined)),
               )
             ],
           ),

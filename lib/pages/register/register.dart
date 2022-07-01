@@ -1,14 +1,21 @@
+import 'package:dio/dio.dart';
 import 'package:ekub/common/constants.dart';
 import 'package:ekub/components/logo.dart';
 import 'package:ekub/pages/Home/home.dart';
 import 'package:ekub/pages/login/login.dart';
+import 'package:ekub/service/auth/auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../Navigator/navigate.dart';
+import '../../common/toast.dart';
+import '../../model/data/user/user.dart';
 
 class Register extends StatelessWidget {
-  const Register({Key? key}) : super(key: key);
+  Register({Key? key}) : super(key: key);
+  TextEditingController fullname = TextEditingController();
 
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -25,6 +32,7 @@ class Register extends StatelessWidget {
                   child: Column(
                 children: [
                   TextFormField(
+                    controller: fullname,
                     decoration: InputDecoration(
                       hintText: "full name",
                       fillColor: Colors.white,
@@ -42,6 +50,7 @@ class Register extends StatelessWidget {
                   ),
                   kspace,
                   TextFormField(
+                    controller: username,
                     decoration: InputDecoration(
                       hintText: "username",
                       fillColor: Colors.white,
@@ -59,6 +68,7 @@ class Register extends StatelessWidget {
                   ),
                   kspace,
                   TextFormField(
+                    controller: password,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: "password",
@@ -81,12 +91,10 @@ class Register extends StatelessWidget {
                     children: [
                       TextButton(
                           onPressed: () {
-                            Navigate.preferReturn(context, const Login());
+                            Navigate.neverReturn(context, Login());
                           },
                           child: const Text("Login?")),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text("Forgot Passwod?"))
+                      TextButton(onPressed: () {}, child: const Text(""))
                     ],
                   ),
                   kspace,
@@ -94,7 +102,7 @@ class Register extends StatelessWidget {
                   FlatButton(
                       color: kprimary,
                       onPressed: () {
-                        Navigate.neverReturn(context, const Home());
+                        register(context);
                       },
                       child: const Text(
                         "Register",
@@ -107,5 +115,33 @@ class Register extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  void register(BuildContext context) async {
+    Auth auth = Auth();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: SizedBox(
+                height: 30, width: 30, child: CircularProgressIndicator()),
+          );
+        });
+    try {
+      await auth
+          .signup(User(
+              fullname.text.trim(), username.text.trim(), password.text.trim()))
+          .then((response) => {
+                if (response.statusCode == 200)
+                  {
+                    CToast.show(false, response.data['msg']),
+                    Navigator.pop(context),
+                    Navigate.neverReturn(context, const Home())
+                  }
+              });
+    } on DioError catch (e) {
+      Navigator.pop(context);
+      CToast.show(true, e.response?.data);
+    }
   }
 }

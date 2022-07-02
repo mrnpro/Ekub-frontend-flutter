@@ -4,15 +4,19 @@ import 'package:ekub/common/constants.dart';
 import 'package:ekub/common/toast.dart';
 import 'package:ekub/components/logo.dart';
 import 'package:ekub/model/data/account/account.dart';
+import 'package:ekub/pages/Home/widget/TopPart/circleButtons.dart';
 import 'package:ekub/pages/Home/widget/custom_dialog.dart';
 import 'package:ekub/pages/Home/widget/options.dart';
+import 'package:ekub/service/services.dart';
 
 import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../../../model/data/Request/request.dart';
-import '../../../service/http.dart';
+import '../../../../model/data/Request/request.dart';
+import '../../../../service/http/http.dart';
+import 'choosePackage/choose_package.dart';
+import 'circle_buttons_packages.dart';
 
 class topHolder extends StatefulWidget {
   const topHolder({
@@ -27,24 +31,9 @@ class topHolder extends StatefulWidget {
 }
 
 class _topHolderState extends State<topHolder> {
-  Future account() async {
-    final token = await const FlutterSecureStorage().read(key: 'auth');
-
-    try {
-      Response response = await Http().getRequest(
-          urlPath: '/account', header: Request(token.toString()).toJson());
-      if (response.statusCode == 200) {
-        print(response.data['account']);
-
-        return Account.fromJson(response.data['account']);
-      }
-    } on DioError catch (e) {
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final service = Services();
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -91,7 +80,7 @@ class _topHolderState extends State<topHolder> {
               )
             ], color: Colors.blue, borderRadius: BorderRadius.circular(20)),
             child: FutureBuilder(
-              future: account(),
+              future: service.account(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   Account account = snapshot.data;
@@ -118,8 +107,8 @@ class _topHolderState extends State<topHolder> {
                     ],
                   );
                 }
-                return Center(
-                  child: const CircularProgressIndicator(
+                return const Center(
+                  child: CircularProgressIndicator(
                     color: kwhite,
                   ),
                 );
@@ -129,110 +118,8 @@ class _topHolderState extends State<topHolder> {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircleButtons(
-                  icon: Icons.wallet, text: "penality", onPressed: () {}),
-              CircleButtons(
-                  icon: Icons.payment, text: "Withdraw", onPressed: () {}),
-              CircleButtons(
-                  icon: Icons.charging_station_rounded,
-                  text: "Recharge",
-                  onPressed: () {
-                    showDialog(
-                        context: context, builder: (context) => CustomDialog());
-                  }),
-              CircleButtons(
-                  icon: Icons.refresh,
-                  text: "Refresh",
-                  onPressed: () {
-                    setState(() {
-                      CToast.show(false, "Refreshing...");
-                    });
-                  }),
-            ],
-          ),
+          const CircleButtonsWidget()
         ],
-      ),
-    );
-  }
-}
-
-class ChoosePackage extends StatefulWidget {
-  const ChoosePackage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<ChoosePackage> createState() => _ChoosePackageState();
-}
-
-class _ChoosePackageState extends State<ChoosePackage> {
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: const [
-      circlePackageButtons(
-        pkg: "50",
-      ),
-      circlePackageButtons(
-        pkg: "100",
-      ),
-      circlePackageButtons(
-        pkg: "200",
-      ),
-      circlePackageButtons(
-        pkg: "500",
-      ),
-    ]);
-  }
-}
-
-class circlePackageButtons extends StatefulWidget {
-  const circlePackageButtons({
-    Key? key,
-    required this.pkg,
-  }) : super(key: key);
-  final String pkg;
-
-  @override
-  State<circlePackageButtons> createState() => _circlePackageButtonsState();
-}
-
-class _circlePackageButtonsState extends State<circlePackageButtons> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const Center(
-                child: SizedBox(
-                    height: 30, width: 30, child: CircularProgressIndicator()),
-              );
-            });
-        final token = await const FlutterSecureStorage().read(key: 'auth');
-        try {
-          Response response = await Http().postRequest(
-              urlPath: 'choosePackage/${widget.pkg}',
-              header: Request(token.toString()).toJson());
-          Navigator.pop(context);
-
-          CToast.show(false, response.data['msg']);
-          setState(() {});
-        } on DioError catch (e) {
-          print(e.response);
-          CToast.show(true, e.response.toString());
-          Navigator.pop(context);
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        child: CircleAvatar(
-          radius: 25,
-          child: Text(widget.pkg),
-        ),
       ),
     );
   }

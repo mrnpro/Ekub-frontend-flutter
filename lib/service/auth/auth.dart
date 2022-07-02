@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ekub/model/data/Request/request.dart';
 
 import 'package:ekub/model/data/user/user.dart';
-import 'package:ekub/service/http.dart';
+import 'package:ekub/service/http/http.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Auth extends Http {

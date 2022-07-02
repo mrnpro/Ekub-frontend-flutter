@@ -1,7 +1,7 @@
-import 'package:ekub/pages/Home/widget/botom_list.dart';
+import 'package:ekub/pages/Home/widget/DaysPart/botom_list.dart';
+import 'package:ekub/pages/Home/widget/DaysPart/days.dart';
 
-import 'package:ekub/pages/Home/widget/days.dart';
-import 'package:ekub/pages/Home/widget/top_holder.dart';
+import 'package:ekub/pages/Home/widget/TopPart/top_holder.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {

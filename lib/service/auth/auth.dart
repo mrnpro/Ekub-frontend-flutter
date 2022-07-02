@@ -7,8 +7,8 @@ import 'package:ekub/model/data/user/user.dart';
 import 'package:ekub/service/http.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class Auth extends http {
-  final storage = FlutterSecureStorage();
+class Auth extends Http {
+  final storage = const FlutterSecureStorage();
   Future signin(User user) async {
     Response response =
         await postRequest(urlPath: 'auth/login', data: user.toJson());

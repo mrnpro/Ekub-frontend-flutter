@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Options extends StatelessWidget {
-  const Options(
+class CircleButtons extends StatelessWidget {
+  const CircleButtons(
       {Key? key,
       required this.icon,
       required this.text,

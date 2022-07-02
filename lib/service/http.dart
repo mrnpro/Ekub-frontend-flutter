@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class http {
+class Http {
   Dio dio = Dio(BaseOptions(baseUrl: "http://192.168.1.6:5000/"));
 
   Future getRequest({

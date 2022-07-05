@@ -25,7 +25,7 @@ class DaysStatus {
             Icons.circle,
           ),
         );
-      case "penality":
+      case "penalty":
         return Container(
           padding: const EdgeInsets.all(11),
           decoration: BoxDecoration(
@@ -34,6 +34,17 @@ class DaysStatus {
           child: Icon(
             color: Colors.white,
             Icons.one_x_mobiledata_rounded,
+          ),
+        );
+      default:
+        return Container(
+          padding: const EdgeInsets.all(11),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 141, 141, 141),
+              borderRadius: BorderRadius.circular(14)),
+          child: Icon(
+            color: Colors.white,
+            Icons.circle,
           ),
         );
     }

@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
 class Http {
-  Dio dio = Dio(BaseOptions(baseUrl: "http://192.168.1.6:5000/"));
+  Dio dio = Dio(BaseOptions(
+      baseUrl: "https://peaceful-kobuk-valley-48294.herokuapp.com/"));
 
   Future getRequest({
     required String urlPath,

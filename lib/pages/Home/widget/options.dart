@@ -1,3 +1,4 @@
+import 'package:ekub/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class CircleButtons extends StatelessWidget {
@@ -18,16 +19,16 @@ class CircleButtons extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 23,
-            backgroundColor: const Color.fromARGB(255, 163, 206, 241),
+            backgroundColor: ksecondary,
             child: IconButton(onPressed: () => onPressed(), icon: Icon(icon)),
           ),
           const SizedBox(
             height: 13,
           ),
           Text(
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 11,
+                fontSize: MediaQuery.of(context).size.width / 40,
               ),
               text)
         ],

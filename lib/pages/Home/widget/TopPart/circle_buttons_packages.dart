@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/model/data/Request/request.dart';
+import 'package:ekub/service/services.dart';
+import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../common/toast.dart';
 import '../../../../service/http/http.dart';
 
-class CirclePackageButtons extends StatefulWidget {
+class CirclePackageButtons extends StatelessWidget {
   const CirclePackageButtons({
     Key? key,
     required this.pkg,
@@ -14,15 +17,11 @@ class CirclePackageButtons extends StatefulWidget {
   final String pkg;
 
   @override
-  State<CirclePackageButtons> createState() => _circlePackageButtonsState();
-}
-
-class _circlePackageButtonsState extends State<CirclePackageButtons> {
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
         showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return const Center(
@@ -33,23 +32,24 @@ class _circlePackageButtonsState extends State<CirclePackageButtons> {
         final token = await const FlutterSecureStorage().read(key: 'auth');
         try {
           Response response = await Http().postRequest(
-              urlPath: 'choosePackage/${widget.pkg}',
+              urlPath: 'choosePackage/${pkg}',
               header: Request(token.toString()).toJson());
-          Navigator.pop(context);
+          Navigate.neverReturn(context, Wrapper());
 
           CToast.show(false, response.data['msg']);
-          setState(() {});
+
+          Services().getter();
         } on DioError catch (e) {
           print(e.response);
           CToast.show(true, e.response.toString());
-          Navigator.pop(context);
+          Navigate.neverReturn(context, Wrapper());
         }
       },
       child: Container(
         margin: const EdgeInsets.all(10),
         child: CircleAvatar(
           radius: 25,
-          child: Text(widget.pkg),
+          child: Text(pkg),
         ),
       ),
     );

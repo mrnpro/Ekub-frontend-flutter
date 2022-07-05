@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class Days extends StatelessWidget {
   const Days({
+    required this.currentday,
     Key? key,
   }) : super(key: key);
-
+  final currentday;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,7 +17,7 @@ class Days extends StatelessWidget {
         ),
         TextButton(
             onPressed: () {},
-            child: const Text("3/90",
+            child: Text("$currentday/90",
                 style: TextStyle(
                   color: Colors.red,
                 )))

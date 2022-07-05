@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Navigate {
   static preferReturn(BuildContext context, Widget to) {
@@ -7,6 +6,10 @@ class Navigate {
   }
 
   static neverReturn(BuildContext context, Widget to) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => to));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => to),
+      (route) => false,
+    );
   }
 }

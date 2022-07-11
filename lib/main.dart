@@ -1,17 +1,12 @@
-import 'dart:developer';
-
-import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/common/constants.dart';
 import 'package:ekub/components/logo.dart';
-import 'package:ekub/pages/login/login.dart';
-import 'package:ekub/pages/splash.dart';
+
 import 'package:ekub/service/services.dart';
 import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-import 'pages/Home/home.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());

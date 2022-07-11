@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../Navigator/navigate.dart';
+import '../../../../common/showdialog.dart';
 import '../../../../common/toast.dart';
 import '../../../../wrapper/wrapper.dart';
 import '../custom_dialog.dart';
@@ -24,11 +25,7 @@ class CircleButtonsWidget extends StatelessWidget {
             text: "penalty",
             onPressed: () async {
               try {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => const Center(
-                          child: CircularProgressIndicator(),
-                        ));
+                CDialog.show(context);
                 final token =
                     await const FlutterSecureStorage().read(key: 'auth');
                 Response response = await Http().getRequest(
@@ -57,14 +54,28 @@ class CircleButtonsWidget extends StatelessWidget {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text(
-                                      "Proceed",
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                  ),
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                        CDialog.show(context);
+
+                                        try {
+                                          response = await Http().postRequest(
+                                              urlPath: 'penality',
+                                              header: Request(token.toString())
+                                                  .toJson());
+                                          CToast.show(
+                                              false, response.data['msg']);
+                                          Navigator.pop(context);
+                                        } on DioError catch (e) {
+                                          Navigator.pop(context);
+                                          CToast.show(
+                                              true, e.response!.data['msg']);
+                                        }
+                                      },
+                                      child: const Text(
+                                        "PAY",
+                                        style: TextStyle(color: Colors.black),
+                                      )),
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
@@ -77,7 +88,10 @@ class CircleButtonsWidget extends StatelessWidget {
                                 ]),
                           ],
                         ));
-              } on DioError catch (e) {}
+              } on DioError catch (e) {
+                Navigator.pop(context);
+                CToast.show(true, e.response!.data['msg']);
+              }
             }),
         CircleButtons(
             icon: Icons.payment,

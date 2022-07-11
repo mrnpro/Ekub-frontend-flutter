@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:ekub/model/data/account/account_user.dart';
-import 'package:ekub/model/data/account/days.dart';
+
 import 'package:ekub/service/http/http.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../model/data/Request/request.dart';
-import '../model/data/account/account.dart';
 
 class Services extends ChangeNotifier {
   final http = Http();
@@ -32,10 +30,5 @@ class Services extends ChangeNotifier {
     } on DioError catch (e) {
       print(e.response);
     }
-  }
-
-  getter() {
-    notifyListeners();
-    return account();
   }
 }

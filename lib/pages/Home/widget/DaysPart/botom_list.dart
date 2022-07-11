@@ -1,7 +1,11 @@
+import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/pages/Home/widget/DaysPart/daysStatus.dart';
 import 'package:ekub/service/services.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../wrapper/wrapper.dart';
+
+// ignore: must_be_immutable
 class BottomList extends StatefulWidget {
   BottomList({
     Key? key,
@@ -18,7 +22,7 @@ class _BottomListState extends State<BottomList> {
 
   Future<void> _pull() async {
     await Services().account();
-    setState(() {});
+    Navigate.neverReturn(context, Wrapper());
   }
 
   @override

@@ -1,22 +1,12 @@
-import 'package:dio/dio.dart';
-import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/common/constants.dart';
-import 'package:ekub/common/toast.dart';
+
 import 'package:ekub/components/logo.dart';
-import 'package:ekub/model/data/account/account.dart';
+
 import 'package:ekub/pages/Home/widget/TopPart/circle_buttons.dart';
-import 'package:ekub/pages/Home/widget/custom_dialog.dart';
-import 'package:ekub/pages/Home/widget/options.dart';
-import 'package:ekub/service/services.dart';
 
-import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../../../../model/data/Request/request.dart';
-import '../../../../service/http/http.dart';
 import 'choosePackage/choose_package.dart';
-import 'circle_buttons_packages.dart';
 
 class topHolder extends StatefulWidget {
   const topHolder({
@@ -94,13 +84,26 @@ class _topHolderState extends State<topHolder> {
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white))),
                 widget.data['package'] != "none"
-                    ? Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(widget.data['balance'],
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                                color: Colors.white)))
+                    ? Stack(
+                        children: [
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(widget.data['balance'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Colors.white))),
+                          Positioned(
+                              right: 12,
+                              child: Text(
+                                "/ ${widget.data['package']} PKG",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: ksecondary,
+                                    fontSize: 21),
+                              ))
+                        ],
+                      )
                     : const ChoosePackage(),
               ],
             ),

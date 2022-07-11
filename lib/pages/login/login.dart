@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:dio/dio.dart';
 import 'package:ekub/Navigator/navigate.dart';
 import 'package:ekub/common/constants.dart';
@@ -9,6 +11,9 @@ import 'package:ekub/pages/register/register.dart';
 import 'package:ekub/service/auth/auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../common/showdialog.dart';
+
+// ignore: must_be_immutable
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
   TextEditingController username = TextEditingController();
@@ -140,14 +145,7 @@ class Login extends StatelessWidget {
   }
 
   void login(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: SizedBox(
-                height: 30, width: 30, child: CircularProgressIndicator()),
-          );
-        });
+    CDialog.show(context);
     try {
       await auth
           .signin(User("", username.text.trim(), PIN.text.trim()))

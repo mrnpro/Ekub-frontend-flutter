@@ -1,16 +1,12 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
+import 'package:ekub/Navigator/navigate.dart';
+import 'package:ekub/common/constants.dart';
 import 'package:ekub/pages/Home/widget/DaysPart/botom_list.dart';
 import 'package:ekub/pages/Home/widget/DaysPart/days.dart';
 
 import 'package:ekub/pages/Home/widget/TopPart/top_holder.dart';
+import 'package:ekub/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
-import '../../model/data/account/account.dart';
 import '../../service/services.dart';
 
 class Body extends StatefulWidget {
@@ -54,8 +50,32 @@ class _BodyState extends State<Body> {
           //     Days(data['days']['days'], data['days']['currentday']));
           // print("returning");
           // print(account.days!.currentday);
-
-          return const Center(child: CircularProgressIndicator());
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.cloud_off),
+                    kspace,
+                    Text("No Connection "),
+                    kspace,
+                    TextButton(
+                        onPressed: () {
+                          Navigate.neverReturn(context, Wrapper());
+                        },
+                        child: Text("Retry"))
+                  ]),
+            );
+          }
+          return Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              kspace,
+              Text("Please Wait ...")
+            ],
+          ));
         });
   }
 }

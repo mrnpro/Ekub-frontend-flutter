@@ -7,9 +7,11 @@ import 'package:ekub/service/auth/auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../Navigator/navigate.dart';
+import '../../common/showdialog.dart';
 import '../../common/toast.dart';
 import '../../model/data/user/user.dart';
 
+// ignore: must_be_immutable
 class Register extends StatelessWidget {
   Register({Key? key}) : super(key: key);
   TextEditingController fullname = TextEditingController();
@@ -109,7 +111,6 @@ class Register extends StatelessWidget {
                       ),
                       kspace,
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "Already have an account ?",
@@ -120,7 +121,6 @@ class Register extends StatelessWidget {
                                 Navigate.neverReturn(context, Login());
                               },
                               child: const Text("Login")),
-                          TextButton(onPressed: () {}, child: const Text(""))
                         ],
                       ),
                       kspace,
@@ -157,21 +157,7 @@ class Register extends StatelessWidget {
 
   void register(BuildContext context) async {
     Auth auth = Auth();
-    showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return Center(
-            child: Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: kwhite,
-              ),
-              child: SizedBox(
-                  height: 30, width: 30, child: CircularProgressIndicator()),
-            ),
-          );
-        });
+    CDialog.show(context);
     try {
       await auth
           .signup(

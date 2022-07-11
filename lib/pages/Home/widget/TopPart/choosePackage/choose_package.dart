@@ -13,7 +13,7 @@ class ChoosePackage extends StatefulWidget {
 class _ChoosePackageState extends State<ChoosePackage> {
   @override
   Widget build(BuildContext context) {
-    return Row(children: const [
+    return Wrap(children: const [
       CirclePackageButtons(
         pkg: "50",
       ),

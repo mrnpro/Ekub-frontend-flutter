@@ -17,7 +17,7 @@ class Days extends StatelessWidget {
         ),
         TextButton(
             onPressed: () {},
-            child: Text("$currentday/90",
+            child: Text("$currentday/89",
                 style: TextStyle(
                   color: Colors.red,
                 )))
